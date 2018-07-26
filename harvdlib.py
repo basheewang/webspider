@@ -7,11 +7,13 @@ import http
 import http.cookiejar
 import json
 import os
-import time
+# import time
 import urllib
 from optparse import OptionParser
-from itertools import islice
+# from itertools import islice
 import requests
+from bs4 import BeautifulSoup
+import re
 
 
 # For debug purpose.
@@ -45,7 +47,7 @@ def getdata(url, title):
     total_page = len(bpj['sequences'][0]['canvases'])
     print("There are total ", total_page, "pictures need to be downloaded.")
     page_no = len(str(len(bpj['sequences'][0]['canvases'])))
-    wait_time = 5
+    # wait_time = 5
     if not os.path.exists(os.path.join(os.path.curdir, title)):
         os.mkdir(os.path.join(os.path.curdir, title))
 
@@ -72,7 +74,7 @@ def getdata(url, title):
         else:
             print('File too small, skipped!')
 
-        print("Wait", wait_time, "seconds...")
+        # print("Wait", wait_time, "seconds...")
         # for i in range(wait_time)[::-1]:
         #     time.sleep(1)
         #     print("%d\r" % (i))
@@ -81,8 +83,33 @@ def getdata(url, title):
 if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option("-u", "--url", default='', dest="url",
-                      help="The url of a book from guoxue123")
+                      help="The url of a book from Harvard University Library")
     parser.add_option("-t", "--title", default='temp', dest="title",
-                      help="The url of a book from guoxue123")
+                      help="The folder you want to save in.")
+    parser.add_option("-l", "--listurl", default='', dest="listurl",
+                      help="The url of a list of vols form a book.")
     (options, args) = parser.parse_args()
-    getdata(options.url, options.title)
+    if len(options.listurl) > 10:
+        vol_list = []
+        vol_url = ''
+        vol_cont = urllib.request.urlopen(
+            options.listurl).read().decode('utf8', 'ignore')
+        vol_soup = BeautifulSoup(vol_cont, 'html.parser')
+        for url in vol_soup.find('table').findAll('a'):
+            vol_list.append(url['href'])
+        vol = len(vol_list)
+        print("There are total", vol, "volumes for this book.")
+        for idx, url in enumerate(vol_list):
+            print("\tNow working on the Vol.", idx + 1, "...")
+            json_cont = urllib.request.urlopen(
+                url).read().decode('utf8', 'ignore')
+            for script in BeautifulSoup(json_cont, 'html.parser').findAll('script'):
+                if 'window.harvard_md_server' in script.text:
+                    # voljson = json.loads(script.text)
+                    vol_url = re.compile(
+                        r'"loadedManifest": "(.*)",').search(script.text).group(1)
+                    break
+            getdata(vol_url, options.title + '_' +
+                    '{:0{no}d}'.format(idx + 1, no=len(str(vol))))
+    else:
+        getdata(options.url, options.title)
