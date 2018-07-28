@@ -100,7 +100,7 @@ if __name__ == '__main__':
         vol = len(vol_list)
         print("There are total", vol, "volumes for this book.")
         for idx, url in enumerate(vol_list):
-            print("\tNow working on the Vol.", idx + 1, "...")
+            print("Now working on the Vol.", idx + 1, "...")
             json_cont = urllib.request.urlopen(
                 url).read().decode('utf8', 'ignore')
             for script in BeautifulSoup(json_cont, 'html.parser').findAll('script'):
