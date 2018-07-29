@@ -8,5 +8,25 @@
 * Chinese Maritime Customs 中國舊海關資料
 
   - [X] 簡文編 : 五卷 Jian wen bian : 5 juan
-  簡文編 : 五卷 / 伍袁萃編輯 錢紹起校. /[China] : 吳縣伍毓耆, 伍毓昚貽安堂, 明萬曆丁未 [35年, 1607] /是書為彙古書史中言簡而有文者為一編. /Seal: "世秀之印". /九行二十二字, 四周單邊, 白口, 單魚尾, 書口下刋"貽安堂", 框高 20.9 x 11.5公分. /伍袁萃, jin shi 1580, ed. /錢紹起. / [China] : Wuxian Wu Yuqi, Wu Yushen Yi an tang
+    簡文編 : 五卷 / 伍袁萃編輯 錢紹起校. /[China] : 吳縣伍毓耆, 伍毓昚貽安堂, 明萬曆丁未 [35年, 1607] /是書為彙古書史中言簡而有文者為一編. /Seal: "世秀之印". /九行二十二字, 四周單邊, 白口, 單魚尾, 書口下刋"貽安堂", 框高 20.9 x 11.5公分. /伍袁萃, jin shi 1580, ed. /錢紹起. / [China] : Wuxian Wu Yuqi, Wu Yushen Yi an tang (1607)
+  - [ ] 飛霞館選百家纂雋 : 10卷 Fei xia guan xuan Bai jia zuan jun : 10 juan
+    飛霞館選百家纂雋 : 10卷 / 陸孝錫編選. /百家纂雋 /[China] : 陸孝錫, 明萬曆 [i.e. between 1573 and 1620] /九行二十字, 四周單邊, 白口, 無魚尾, 框高 21.3 x 12.9. /陸孝錫. / [China] : Lu Xiaoxi (1573)
+  - [ ] 醒夢駢言 : 12回. Xing meng pian yan :12 hui
+    醒夢駢言 : 12回. [Microform] / 菊畦主人偶輯. /[China : s.n.], [淸初 between 1644 and 1735] /原刋本. /卷末有藏者齊如山親筆跋語两則. /Juqizi, active 17th century. / [China : s.n.] (1644)
+  - [X] 新鐫註釋里居通用合璧文翰 : 二卷 Xin juan zhu shi Li ju tong yong he bi wen han : 2 juan
+    新鐫註釋里居通用合璧文翰 : 二卷 / 屠隆編選 俞啟相校正. /里居通用合璧文翰 /[China] : 建邑書林種德堂熊雲吾, 明萬曆 [i.e. between 1573 and 1620] /十行十八字, 上欄十六行九字, 四周單邊, 白口, 雙魚尾, 框高 20.9 x 12.3. /卷二有牌記, 刋「書林種德堂熊氏雲吾繡梓行」 /Seal: "殘花書屋". /屠隆, 1542-1605, comp. /俞啟相, 校正. /熊雲吾, 刋. /種德堂, 刋. / [China] : Jianyi Shulin Zhong de tang Xiong Yunwu (1573)
+  - [ ] 新箋決科古今源流至論 : 前集十卷, 後集十卷, 續集十卷, 別集十卷 Xin jian jue ke gu jin yuan liu zhi lun : qian ji 10 juan, hou ji 10 juan, xu ji 10 juan, bie ji 10 juan
+    新箋決科古今源流至論 : 前集十卷, 後集十卷, 續集十卷, 別集十卷 / 林駉撰 黃履翁編別集. /古今源流至論 /[China : 建陽書林詹氏刻本, 明宣德2年[1427] /十三行二八字, 四周雙邊, 黑口, 雙魚尾, 框高19.8 x 12.9. /Seals: "旡竟先生獨志堂物", "咸豐庚申以後攷藏" [... et al.]. /著錄: 中國古籍善本書目. /林駉, 編. /黃履翁, jin shi 1232, 編. / [China : Jianyang shu lin Zhan shi e ben (1465)
+  - [ ] 投桃記 : 二卷 Tou tao ji : er juan
+    汪廷訥, active 16th century-17th century. /投桃記 : 二卷 / 汪廷訥著. /環翠堂新編投桃記 /精鈔本. /[China] : 立承, [民國間, between 1911 and 1953] /10 行 20 字, 四周單欄白口單魚尾, 框 21.5 x 13.9 公分. /卷前有目錄, 目錄題名"環翠堂新編投桃記". /有精繪插圖. /中國國家圖書館有明汪氏刻《環翠堂樂府投桃記》二卷, 《古本戲曲叢刊》二集亦收錄. /有"齊林玉世世子孫永寶用"朱長方, "高陽齊氏百金齋存書之印"朱方, "齊氏所藏戲曲小說印"白方, "王立承"白方, "立承寫定"朱方, "如山讀過"白方, "鳴晦盧珍藏金石書畫記"朱長方印. /Wang, Tingne, active 16th century-17th century. / 精鈔本. /Jing chao ben. / [China] : Licheng (1911)
+  - [ ] (新編)西川圖 : 30齣. (Xin bian) xi chuan tu :30 chu
+    洪昇, 1645-1704. /(新編)西川圖 : 30齣. [Microform] / 洪昇撰. /西川圖 /[China : s.n.], 淸咸豐9 [1859] /鈔本. /簽題: 新編西川圖傳, 奇味冰之曲. /Hong, Sheng, 1645-1704. / [China : s.n.] (1859)
+  - [ ] 新刻友花居上林鴻 : 四卷 Xin ke You hua ju shang lin hong : 4 juan
+    新刻友花居上林鴻 : 四卷 / 鍾惺編輯 陳仁錫較. /友花居上林鴻 /上林鴻 /[China : s.n., 明末 i.e. between 1621 and 1644] /十行十六字, 上欄十二行十字, 四周單邊, 白口, 無魚尾, 框高 19.6 x 11.9. /Seals: "碧梧亭藏書印" [... et al.]. /鍾惺, 1574-1625, 編輯. /陳仁錫, 1581-1636, 較. / [China : s.n. (1621)
+  - [ ] 汪氏珊瑚網法書題跋 : 二十四卷 Wang shi shan hu wang fa shu ti ba : er shi si juan
+    汪砢玉, 1587- /汪氏珊瑚網法書題跋 : 二十四卷 / [汪砢玉撰] /鈔本. /[China : s.n., 淸, between 1644 and 1911] /10行20字, 無格. /Wang, Luoyu, 1587- / 鈔本. /Chao ben. / [China : s.n. (1644)
+  - [ ] 鼎鐫潄石山房彙編註釋士民便觀雲箋柬 : 四卷 Ding juan Shu shi shan fang hui bian zhu shi shi min bian guan yun jian jian : 4 juan
+    鼎鐫潄石山房彙編註釋士民便觀雲箋柬 : 四卷 / 陳翊九彙編. /雲箋柬 /二刻翰墨琅[han] /翰墨琅[han] /[China] : 四知館, [明末 i.e. between 1621 and 1644] /九行十八字, 上欄十一行十字, 四周單邊, 白口, 無魚尾, 框高 20.5 x 11.7. /書名頁題: (二刻)「翰墨琅函 ... 四知館梓」 /Seal: "天橋文庫". /陳翊九, 彙編. /四知館, 刋. / [China] : Si zhi guan (1621)
+  - [X] [唐詩韻選] [Tang shi yun xuan]
+    [唐詩韻選] / 桂雪芸[選輯]. /[China : s.n.], 清道光30 [1850] 序. /桂雪芸, active 1850, [選輯] / [China : s.n.] (1850)
 
