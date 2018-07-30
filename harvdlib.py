@@ -10,7 +10,7 @@ import os
 # import time
 import urllib
 from optparse import OptionParser
-# from itertools import islice
+from itertools import islice
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -88,6 +88,8 @@ if __name__ == '__main__':
                       help="The folder you want to save in.")
     parser.add_option("-l", "--listurl", default='', dest="listurl",
                       help="The url of a list of vols form a book.")
+    parser.add_option("-s", "--startvol", default=0, dest="startvol",
+                      help="The url of a list of vols form a book.")
     (options, args) = parser.parse_args()
     if len(options.listurl) > 10:
         vol_list = []
@@ -99,7 +101,8 @@ if __name__ == '__main__':
             vol_list.append(url['href'])
         vol = len(vol_list)
         print("There are total", vol, "volumes for this book.")
-        for idx, url in enumerate(vol_list):
+        # for idx, url in enumerate(vol_list):
+        for idx, url in islice(enumerate(vol_list), int(options.startvol) - 1, vol):
             print("Now working on the Vol.", idx + 1, "...")
             json_cont = urllib.request.urlopen(
                 url).read().decode('utf8', 'ignore')
