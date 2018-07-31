@@ -3,6 +3,11 @@
    convert 02_native.jpg -type Grayscale 1.jpg
    
    convert 1.jpg -threshold 50% 2.jpg
+
+   for i in *.jpg; do convert "$i" -type Grayscale "${i%.jpg}_gray.jpg"; done
+
+   for i in *gray.jpg; do convert "$i" -threshold 50% "${i%.jpg}_bw.jpg"; done
+
 * Bao Juan 寶卷 Collection
 
   1. [ ] *正信除疑無修證自在寳卷 Zheng xin chu yi wu xiu zheng zi zai bao juan*
