@@ -88,7 +88,7 @@ if __name__ == '__main__':
                       help="The folder you want to save in.")
     parser.add_option("-l", "--listurl", default='', dest="listurl",
                       help="The url of a list of vols form a book.")
-    parser.add_option("-s", "--startvol", default=0, dest="startvol",
+    parser.add_option("-s", "--startvol", default=1, dest="startvol",
                       help="The url of a list of vols form a book.")
     (options, args) = parser.parse_args()
     if len(options.listurl) > 10:
