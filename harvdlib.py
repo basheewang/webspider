@@ -62,7 +62,7 @@ def getdata(url, title):
         print(
             datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             "\t[" + '{:0{no}d}'.format(idx + 1, no=page_no) +
-            "/" + str(total_page) + "] Download",
+            "/" + str(total_page) + "]",
             pic_url, end=' ')
 
         if os.path.isfile(fn):
