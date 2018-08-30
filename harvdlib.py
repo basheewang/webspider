@@ -14,6 +14,7 @@ from itertools import islice
 import requests
 from bs4 import BeautifulSoup
 import re
+from datetime import datetime
 
 
 # For debug purpose.
@@ -59,6 +60,7 @@ def getdata(url, title):
             os.path.curdir, title,
             '{:0{no}d}'.format(idx + 1, no=page_no) + '_' + pic_url.split('/')[-1])
         print(
+            datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             "\t[" + '{:0{no}d}'.format(idx + 1, no=page_no) +
             "/" + str(total_page) + "] Download",
             pic_url, end=' ')
