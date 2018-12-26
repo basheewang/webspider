@@ -18,6 +18,34 @@ from datetime import datetime
 import hashlib
 
 
+# Check duplicated files
+def checkfile(title):
+    # Generate md5 file
+    print('Now generate md5.csv file, please wait...')
+    md5file = open(os.path.curdir + os.sep + title + os.sep + 'md5.csv','w')
+    mymd5 = {}
+    dup_file = []
+    print('File_Name,MD5_Value', file=md5file)
+    for f in [os.path.curdir + os.sep + title + os.sep + f for f
+              in os.listdir(os.path.curdir + os.sep + title) if f.endswith('.jpg')]:
+        if generate_md5(f) in list(mymd5.values()):
+            dupfile = list(mymd5.keys())[list(mymd5.values()).index(generate_md5(f))]
+            print(f, 'has same md5 value as: ', dupfile)
+            dup_file.append(f)
+            dup_file.append(dupfile)
+        mymd5[f]= generate_md5(f)
+        print(f, generate_md5(f), sep=',', file=md5file)
+    print('MD5 file generated as: ', md5file.name)
+    md5file.close()
+
+    if len(dup_file) > 0:
+        for f in list(set(dup_file)):
+            os.remove(f)
+            print(f, ' has been deleted!')
+        print('There are total ', str(len(dup_file)), ' files deleted!')
+        print('Now rerun the command to downloaded.')
+
+
 # For generate md5
 def generate_md5(fname):
     hash_md5 = hashlib.md5()
@@ -115,7 +143,8 @@ def getdata(url, title):
             else:
                 print('File too small, skipped!')
 
-        
+    checkfile(title)
+                
         
 if __name__ == '__main__':
     parser = OptionParser()
@@ -154,26 +183,3 @@ if __name__ == '__main__':
     else:
         getdata(options.url, options.title)
 
-    # Generate md5 file
-    print('Now generate md5.csv file, please wait...')
-    md5file = open(os.path.curdir+os.sep+options.title+os.sep+'md5.csv','w')
-    mymd5 = {}
-    dup_file = []
-    print('File_Name,MD5_Value', file=md5file)
-    for f in [os.path.curdir+os.sep+options.title+os.sep+f for f
-              in os.listdir(os.path.curdir+os.sep+options.title) if f.endswith('.jpg')]:
-        if generate_md5(f) in list(mymd5.values()):
-            dupfile = list(mymd5.keys())[list(mymd5.values()).index(generate_md5(f))]
-            print(f, 'has same md5 value as: ', dupfile)
-            dup_file.append(f)
-            dup_file.append(dupfile)
-        mymd5[f]= generate_md5(f)
-        print(f, generate_md5(f), sep=',', file=md5file)
-    print('MD5 file generated as: ', md5file.name)
-    md5file.close()
-
-    if len(dup_file) > 0:
-        for f in list(set(dup_file)):
-            os.remove(f)
-            print(f, ' has been deleted!')
-        print('Now rerun the command to downloaded.')
