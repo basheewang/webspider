@@ -92,3 +92,10 @@
       吳喬. /圍爐詩話 : 六卷 / 吳喬撰. /鈔本. /[China : s.n., 淸, between 1736 and 1821] /9行25字. /有"翁方綱" "雨山艸堂" "梧門詩草" "詩龕書畫印"等印. /Wu, Shu, active 17th century. / 鈔本. /Chao ben. / [China : s.n. (1736)
 
   21. 
+* 
+** KangXiZiDian
+   #+BEGIN_SRC 
+
+   python harvdlib.py -u "https://iiif.lib.harvard.edu/manifests/drs:17752267" -t "KangXiZiDian"
+   
+   #+END_SRC

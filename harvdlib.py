@@ -52,6 +52,7 @@ def getdata(url, title):
     if not os.path.exists(os.path.join(os.path.curdir, title)):
         os.mkdir(os.path.join(os.path.curdir, title))
 
+    timeout_list=[]
     # for idx, img in islice(enumerate(bpj['sequences'][0]['canvases']), 0, 30):
     for idx, img in enumerate(bpj['sequences'][0]['canvases']):
         # img_url.append(img['images'][0]['resource']['@id'])
@@ -68,20 +69,45 @@ def getdata(url, title):
         if os.path.isfile(fn):
             print('File existed, ignored!')
             continue
-        raw = requests.get(pic_url)
-        if int(raw.headers['Content-length']) > 10000:
-            with open(fn, 'wb') as outfile:
-                outfile.write(raw.content)
-            print('Downloaded!')
-        else:
-            print('File too small, skipped!')
+        try:
+            raw = requests.get(pic_url, timeout=5)
+            if int(raw.headers['Content-length']) > 10000:
+                with open(fn, 'wb') as outfile:
+                    outfile.write(raw.content)
+                    print('Downloaded!')
+            else:
+                print('File too small, skipped!')
+        except:
+            print('\n\t\tTime out! continue to next image.')
+            timeout_list.append((pic_url,fn))
 
         # print("Wait", wait_time, "seconds...")
         # for i in range(wait_time)[::-1]:
         #     time.sleep(1)
         #     print("%d\r" % (i))
 
+    print('There are',len(timeout_list), 'images time out, Now getting them:')
+    i = 0
+    while len(timeout_list) > 0:
+        for pic_url in timeout_list:
+            i += 1
+            print('[' + str(i) + '/' + str(len(timeout_list)) + '] Retrieving',
+                  pic_url[0], '...', end=' ')
+            try:
+                raw = requests.get(pic_url[0], timeout=5)
+                timeout_list.remove(pic_url)
+            except:
+                print('\n\t\tTime out! continue to next image.')
+                # timeout_list.append(pic_url)
+            if int(raw.headers['Content-length']) > 10000:
+                with open(pic_url[1], 'wb') as outfile:
+                    outfile.write(raw.content)
+                    print(pic_url[1].split('\\')[-1] + ' Downloaded!')
+            else:
+                print('File too small, skipped!')
 
+        
+        
 if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option("-u", "--url", default='', dest="url",
