@@ -169,9 +169,14 @@ if __name__ == '__main__':
         print("There are total", vol, "volumes for this book.")
         # for idx, url in enumerate(vol_list):
         for idx, url in islice(enumerate(vol_list), int(options.startvol) - 1, vol):
-            print("Now working on the Vol.", idx + 1, "...")
-            json_cont = urllib.request.urlopen(
-                url).read().decode('utf8', 'ignore')
+            try:
+                print("Now working on the Vol.", idx + 1, "...")
+                json_cont = urllib.request.urlopen(
+                    url).read().decode('utf8', 'ignore')
+            except urllib.error.HTTPError:
+                # if ValueError == "HTTP Error 404: Not Found":
+                continue
+    
             for script in BeautifulSoup(json_cont, 'html.parser').findAll('script'):
                 if 'window.harvard_md_server' in script.text:
                     # voljson = json.loads(script.text)
