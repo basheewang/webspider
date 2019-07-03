@@ -34,7 +34,7 @@ def checkfile(title):
             dup_file.append(f)
             dup_file.append(dupfile)
         mymd5[f]= generate_md5(f)
-        print(f, generate_md5(f), sep=',', file=md5file)
+        print(f.split('\\')[-1], generate_md5(f), sep=',', file=md5file)
     print('MD5 file generated as: ', md5file.name)
     md5file.close()
 
