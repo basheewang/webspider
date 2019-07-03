@@ -108,3 +108,5 @@ webenv/
 *.html
 *_flycheck.py
 */
+*.md
+*.epub
