@@ -32,8 +32,13 @@ def convert2url(title, author=''):
 
 def getcontent(url):
     pc = webdriver.Chrome()
+    pc.set_page_load_timeout(10)
     pc.get(url)
-    print("Extract poems related to", title, 'and', author, 'as author')
+    try:
+        print("Extract poems related to", title,
+              'and', author, 'as author')
+    except NameError:
+        print("Extract poems related to", title)
 
     # pc.find_element_by_id("btnShangxibee5c2e9ddfe").click()
     # pc.find_element_by_id("btnZhushibee5c2e9ddfe").click()
@@ -41,17 +46,22 @@ def getcontent(url):
 
     ppc = pc.page_source
     ppc_soup = BeautifulSoup(ppc, "html.parser")
-    total_page = ppc_soup.find('label', attrs={'id': 'sumPage'}).text
+    all_poem = []
+    total_page = 0
+    try:
+        total_page = ppc_soup.find('label', attrs={'id': 'sumPage'}).text
+    except AttributeError:
+        print("No poems found, please check your keywords!")
+        return all_poem
     if int(total_page) > 1:
         print("Poems which contains", title,
               "have more than 10, will extract the first 10 poems only!")
     so_url = 'https://so.gushiwen.org'  # /shiwenv_ccee5691ba93.aspx
     all_links = [a['href'] for a in
                  ppc_soup.findAll('a', attrs={'target': '_blank'})
-                 if title in a.text]
+                 if 'shiwenv' in a['href']]
     poem_links = [so_url + url for url in all_links]
 
-    all_poem = []
     j = 1
     for link in poem_links:
         print("To extract", j, "out of", len(poem_links), "...", end=' ')
@@ -78,7 +88,7 @@ def getcontent(url):
             poem_cont = poem_soup.find(
                 'div', attrs={'class': 'contson'})
         all_poem.append(['\n## ' + poem_title + ' ##\n',
-                         poem_author, poem_cont])
+                         '**' + poem_author + '**\n', poem_cont])
         # print('Hi')
         j += 1
 
@@ -95,10 +105,13 @@ if __name__ == '__main__':
                       help="The document title of the md file.")
     parser.add_option("-f", "--file", default='', dest="file",
                       help="The file which contains title and author of the poem.")
+    parser.add_option("-o", "--output", default='poem.md', dest="output",
+                      help="The output markdown file name.")
     (options, args) = parser.parse_args()
 
     myallpoem = []
-    myfile = open('poem.md', 'w')
+    myfile = open(options.output, 'w')
+    print("Now write to markdown file...", end='')
     print('% ' + options.title, file=myfile)
     for line in open(options.file, 'r').readlines():
         try:
@@ -119,3 +132,4 @@ if __name__ == '__main__':
                     print(ele, file=myfile)
 
     myfile.close()
+    print('Done!')
