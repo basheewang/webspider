@@ -51,31 +51,39 @@ def getcontent(url):
                  ppc_soup.findAll('a', attrs={'target': '_blank'})
                  if 'shiwenv' in a['href']]
 
+    CRED = '\033[91m'
+    CEND = '\033[0m'
     all_poem = []
     total_page = 0
     try:
         total_page = ppc_soup.find('label', attrs={'id': 'sumPage'}).text
     except AttributeError:
-        print("No poems found, please check your keywords!")
+        print(CRED + "No poems found, please check your keywords!" + CEND)
         return all_poem
     if int(total_page) > 1:
         print("Poems which contains", title,
               "have more than 10, will extract the first 2 pages only!")
         p2_pre = 'https://so.gushiwen.org/search.aspx?type=title&page=2&'
         p2_url = p2_pre + url.split('?')[-1]
-        pc.get(p2_url)
-        p2pc_soup = BeautifulSoup(pc.page_source, "html.parser")
-        all_links2 = [a['href'] for a in
-                      p2pc_soup.findAll('a', attrs={'target': '_blank'})
-                      if 'shiwenv' in a['href']]
-        for l2 in all_links2:
-            all_links.append(l2)
-    poem_links = [so_url + url for url in all_links]
+        try:
+            pc.get(p2_url)
+            p2pc_soup = BeautifulSoup(pc.page_source, "html.parser")
+            all_links2 = [a['href'] for a in
+                          p2pc_soup.findAll('a', attrs={'target': '_blank'})
+                          if 'shiwenv' in a['href']]
+            for l2 in all_links2:
+                all_links.append(l2)
+        except selenium.common.exceptions.TimeoutException:
+            None
+    poem_links = [so_url + url for url in all_links[:3]]
 
     j = 1
     for link in poem_links:
         print("To extract", j, "out of", len(poem_links), "...", end=' ')
-        pc.get(link)
+        try:
+            pc.get(link)
+        except selenium.common.exceptions.TimeoutException:
+            continue
         poem_id = link.split('/')[-1].split('_')[-1].split('.')[0]
         content_only = [False, False, False]
         i = 0
