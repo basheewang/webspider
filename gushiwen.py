@@ -46,6 +46,11 @@ def getcontent(url):
 
     ppc = pc.page_source
     ppc_soup = BeautifulSoup(ppc, "html.parser")
+    so_url = 'https://so.gushiwen.org'  # /shiwenv_ccee5691ba93.aspx
+    all_links = [a['href'] for a in
+                 ppc_soup.findAll('a', attrs={'target': '_blank'})
+                 if 'shiwenv' in a['href']]
+
     all_poem = []
     total_page = 0
     try:
@@ -55,11 +60,16 @@ def getcontent(url):
         return all_poem
     if int(total_page) > 1:
         print("Poems which contains", title,
-              "have more than 10, will extract the first 10 poems only!")
-    so_url = 'https://so.gushiwen.org'  # /shiwenv_ccee5691ba93.aspx
-    all_links = [a['href'] for a in
-                 ppc_soup.findAll('a', attrs={'target': '_blank'})
-                 if 'shiwenv' in a['href']]
+              "have more than 10, will extract the first 2 pages only!")
+        p2_pre = 'https://so.gushiwen.org/search.aspx?type=title&page=2&'
+        p2_url = p2_pre + url.split('?')[-1]
+        pc.get(p2_url)
+        p2pc_soup = BeautifulSoup(pc.page_source, "html.parser")
+        all_links2 = [a['href'] for a in
+                      p2pc_soup.findAll('a', attrs={'target': '_blank'})
+                      if 'shiwenv' in a['href']]
+        for l2 in all_links2:
+            all_links.append(l2)
     poem_links = [so_url + url for url in all_links]
 
     j = 1
@@ -111,15 +121,15 @@ if __name__ == '__main__':
 
     myallpoem = []
     myfile = open(options.output, 'w')
-    print("Now write to markdown file...", end='')
+    print("Now write to markdown file", options.output, "...")
     print('% ' + options.title, file=myfile)
     for line in open(options.file, 'r').readlines():
         try:
-            title = re.split(r'\s+', line.strip())[0]
-            author = re.split(r'\s+', line.strip())[1]
+            title = re.split(r'\s+', line.strip())[0].strip()
+            author = re.split(r'\s+', line.strip())[1].strip()
             mypoem = getcontent(convert2url(title, author))
         except IndexError:
-            title = line.lstrip()
+            title = line.strip()
             mypoem = getcontent(convert2url(title))
         print('\n# 关于', title, '的诗词 #\n', file=myfile)
         myallpoem.append(mypoem)
