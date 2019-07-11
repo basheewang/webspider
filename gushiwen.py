@@ -30,7 +30,7 @@ def convert2url(title, author=''):
     return gsw_url + query
 
 
-def getcontent(url):
+def getcontent(url, number):
     pc = webdriver.Chrome()
     pc.set_page_load_timeout(10)
     pc.get(url)
@@ -75,7 +75,7 @@ def getcontent(url):
                 all_links.append(l2)
         except selenium.common.exceptions.TimeoutException:
             None
-    poem_links = [so_url + url for url in all_links[:3]]
+    poem_links = [so_url + url for url in all_links[:number]]
 
     j = 1
     for link in poem_links:
@@ -92,8 +92,11 @@ def getcontent(url):
                 pc.find_element_by_id(btn + poem_id).click()
             except selenium.common.exceptions.ElementNotInteractableException:
                 content_only[i] = True
-                None
             i += 1
+        if False not in content_only:
+            print("Skipped for poem which has contents only!")
+            j += 1
+            continue
         poem = pc.page_source
         poem_soup = BeautifulSoup(poem, "html.parser")
         poem_title = poem_soup.find('h1').text
@@ -102,6 +105,7 @@ def getcontent(url):
         if False in content_only:
             poem_cont = poem_soup.find(
                 'div', attrs={'class': 'contson'}).findAll('p')[:-1]
+            # continue
         else:
             poem_cont = poem_soup.find(
                 'div', attrs={'class': 'contson'})
@@ -121,6 +125,8 @@ if __name__ == '__main__':
                       help="The url of a book from Harvard University Library")
     parser.add_option("-t", "--title", default='一些诗词', dest="title",
                       help="The document title of the md file.")
+    parser.add_option("-n", "--number", default=None, dest="number",
+                      help="The number of poems want to get if more than 10.")
     parser.add_option("-f", "--file", default='', dest="file",
                       help="The file which contains title and author of the poem.")
     parser.add_option("-o", "--output", default='poem.md', dest="output",
@@ -135,10 +141,10 @@ if __name__ == '__main__':
         try:
             title = re.split(r'\s+', line.strip())[0].strip()
             author = re.split(r'\s+', line.strip())[1].strip()
-            mypoem = getcontent(convert2url(title, author))
+            mypoem = getcontent(convert2url(title, author), options.number)
         except IndexError:
             title = line.strip()
-            mypoem = getcontent(convert2url(title))
+            mypoem = getcontent(convert2url(title), options.number)
         print('\n# 关于', title, '的诗词 #\n', file=myfile)
         myallpoem.append(mypoem)
         for line in mypoem:
