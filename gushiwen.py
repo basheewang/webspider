@@ -127,24 +127,32 @@ if __name__ == '__main__':
                       help="The document title of the md file.")
     parser.add_option("-n", "--number", default=None, dest="number",
                       help="The number of poems want to get if more than 10.")
-    parser.add_option("-f", "--file", default='', dest="file",
+    parser.add_option("-f", "--file", default='mypoem', dest="file",
                       help="The file which contains title and author of the poem.")
     parser.add_option("-o", "--output", default='poem.md', dest="output",
                       help="The output markdown file name.")
     (options, args) = parser.parse_args()
 
     myallpoem = []
-    myfile = open(options.output, 'w')
+    myfile = open(options.output, 'a')
     print("Now write to markdown file", options.output, "...")
     print('% ' + options.title, file=myfile)
     for line in open(options.file, 'r').readlines():
         try:
             title = re.split(r'\s+', line.strip())[0].strip()
             author = re.split(r'\s+', line.strip())[1].strip()
-            mypoem = getcontent(convert2url(title, author), options.number)
+            if options.number is None:
+                mypoem = getcontent(convert2url(title, author),
+                                    options.number)
+            else:
+                mypoem = getcontent(convert2url(title, author),
+                                    int(options.number))
         except IndexError:
             title = line.strip()
-            mypoem = getcontent(convert2url(title), options.number)
+            if options.number is None:
+                mypoem = getcontent(convert2url(title), options.number)
+            else:
+                mypoem = getcontent(convert2url(title), int(options.number))
         print('\n# 关于', title, '的诗词 #\n', file=myfile)
         myallpoem.append(mypoem)
         for line in mypoem:
