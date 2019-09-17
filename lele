@@ -1,0 +1,5 @@
+url_pre='http://v.leleketang.com/dat/hs/ch/k/video/' 
+m=25501 
+step=500 
+for i in [i for i in range(m,m+step)]: 
+     os.system('wget '+url_pre+str(i)+'.mp4') 
